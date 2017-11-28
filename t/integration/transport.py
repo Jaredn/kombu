@@ -107,10 +107,16 @@ class TransportCase(unittest.TestCase):
             options.setdefault('userid', self.userid)
         if self.password:
             options.setdefault('password', self.password)
-        return Connection(transport=self.transport, **options)
+        print(options)
+        connection_to_return = Connection(transport=self.transport, **options)
+        print('RETURNING CONNECTION: ', connection_to_return)
+        return connection_to_return
 
     def do_connect(self):
+        print('CONNECTION OPTIONS:', self.connection_options)
         self.connection = self.get_connection(**self.connection_options)
+        print("Do COnnect Connection: ", self.connection)
+        print("Connected:", self.connected)
         try:
             self.connection.connect()
             self.after_connect(self.connection)
